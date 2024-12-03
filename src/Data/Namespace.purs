@@ -1,6 +1,7 @@
 module VitePluginClassNameExtractor.Data.Namespace (
   makeNamespace,
-  Namespace
+  Namespace,
+  coerceNamespace
 )  where
 
 import Prelude
@@ -32,3 +33,6 @@ derive newtype instance Eq Namespace
 
 makeNamespace :: String -> Namespace
 makeNamespace a = Namespace $ CCNE.Namespace $ a
+
+coerceNamespace :: Namespace -> CCNE.Namespace
+coerceNamespace (Namespace ns) = ns
