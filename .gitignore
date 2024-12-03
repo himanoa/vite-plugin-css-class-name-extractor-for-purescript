@@ -5,3 +5,4 @@ dist/*
 !dist/.gitkeep
 .spec-results
 .psc-ide-port
+.psci_modules
