@@ -11,7 +11,7 @@ When creating a new Spago project, you can use
 to generate this file without the comments in this block.
 -}
 { name = "vite-plugin-css-class-name-extractor-for-purescript"
-, dependencies = [ "console", "effect", "prelude" ]
+, dependencies = [ "console", "css-class-name-extractor", "effect", "prelude" ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
 }
