@@ -1,15 +1,16 @@
-module VitePluginClassNameExtractor.Data.Namespace  where
+module VitePluginClassNameExtractor.Data.Namespace (
+  makeNamespace,
+  Namespace
+)  where
 
 import Prelude
 
 import Control.Alternative (guard)
 import CssClassNameExtractor.Data.Output as CCNE
 import Data.Maybe (Maybe(..))
-import Data.Newtype (class Newtype)
 import Data.Tuple.Nested ((/\))
 
 newtype Namespace = Namespace CCNE.Namespace
-derive instance Newtype Namespace _
 
 mguard :: forall m. Eq m => Monoid m => m -> Maybe m 
 mguard x = x <$ guard (x /= mempty)
