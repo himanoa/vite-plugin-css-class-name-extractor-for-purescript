@@ -12,17 +12,23 @@ to generate this file without the comments in this block.
 -}
 { name = "vite-plugin-css-class-name-extractor-for-purescript"
 , dependencies =
-  [ "console"
+  [ "aff"
+  , "console"
   , "control"
   , "css-class-name-extractor"
   , "effect"
   , "foreign"
   , "maybe"
   , "newtype"
+  , "node-path"
   , "prelude"
   , "simple-json"
   , "spec"
   , "spec-discovery"
+  , "strings"
+  , "strings-extra"
+  , "stringutils"
+  , "transformers"
   , "tuples"
   ]
 , packages = ./packages.dhall
