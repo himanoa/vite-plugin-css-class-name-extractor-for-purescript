@@ -2,13 +2,16 @@ module VitePluginClassNameExtractor.Data.TransformRule where
 
 import Data.Maybe (Maybe, maybe)
 import Data.Monoid (mempty, (<>))
+import Simple.JSON (class ReadForeign)
 import VitePluginClassNameExtractor.Data.Namespace (Namespace, makeNamespace)
 
 -- ! Helper module namespace rule
-data TransformRule = TransformRule {
+newtype TransformRule = TransformRule {
   prefix :: Maybe String,
   suffix :: Maybe String
 }
+
+derive newtype instance ReadForeign TransformRule
 
 type ModuleName = String
 
