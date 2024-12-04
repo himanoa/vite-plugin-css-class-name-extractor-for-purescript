@@ -10,7 +10,7 @@ import CssClassNameExtractor.FS (class MonadFS)
 import Data.Map (Map)
 import Data.Map as Map
 import Data.Maybe (Maybe(..))
-import Data.Tuple (Tuple)
+import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
 import Effect.Aff (Aff, error)
 import Effect.Aff.Class (liftAff)
@@ -19,6 +19,7 @@ import Effect.Console (log)
 import Foreign.Object as FO
 import Node.Path (FilePath)
 import Test.Spec (Spec, describe, it)
+import Test.Spec.Assertions (shouldEqual, shouldNotEqual)
 import VitePluginClassNameExtractor.Build (build)
 import VitePluginClassNameExtractor.Data.ClassNameExtractorConfig (ClassNameExtractorConfig(..))
 import VitePluginClassNameExtractor.Data.TransformRule (TransformRule(..))
@@ -63,8 +64,21 @@ spec = do
         srcDir : "src",
         rules: FO.fromFoldable [ "foo.module.css" /\ TransformRule { prefix: Just "Components", suffix: Just "Style" } ]
       }
-      result <- liftAff $  runTest config (Map.fromFoldable [
+      (Tuple _ result) <- liftAff $  runTest config (Map.fromFoldable [
         "foo.module.css" /\ FileBody ".foo { display; flex; }"
         ]) (build "foo.module.css")
-      liftEffect $ log (show result)
-      pure unit
+
+      result `shouldNotEqual` Map.empty
+
+    describe "when nested directory" do
+      it "should be writed file" do
+        let config = ClassNameExtractorConfig {
+          projectPrefix: "Project",
+          srcDir : "src",
+          rules: FO.fromFoldable [ "**/*/*.css" /\ TransformRule { prefix: Just "Components", suffix: Just "Style" } ]
+        }
+        (Tuple _ result) <- liftAff $  runTest config (Map.fromFoldable [
+          "src/Foo/styles.module.css" /\ FileBody ".foo { display; flex; }"
+          ]) (build "src/Foo/styles.module.css")
+        liftEffect $ log $ show result
+        result `shouldNotEqual` Map.empty
