@@ -12,13 +12,13 @@ spec = do
     describe "#append" do
       describe "when a and b is not empty" do
         it "should be 'foo.bar'" do
-          ((makeNamespace "foo")  <> (makeNamespace "bar")) `shouldEqual` makeNamespace "foo.bar"
+          ((makeNamespace "foo")  <> (makeNamespace "bar")) `shouldEqual` makeNamespace "Foo.Bar"
       describe "when a is empty" do
         it "should be 'bar'" do
-          ((mempty)  <> (makeNamespace "bar")) `shouldEqual` makeNamespace "bar"
+          ((mempty)  <> (makeNamespace "bar")) `shouldEqual` makeNamespace "Bar"
       describe "when b is empty" do
         it "should be 'foo'" do
-          ((makeNamespace "foo")  <> (mempty)) `shouldEqual` makeNamespace "foo"
+          ((makeNamespace "foo")  <> (mempty)) `shouldEqual` makeNamespace "Foo"
 
       describe "when a and b is empty" do
         it "should be ''" do

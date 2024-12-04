@@ -7,12 +7,14 @@ import CssClassNameExtractor.Execute (execute)
 import CssClassNameExtractor.FS (class MonadFS)
 import Data.Foldable (find, for_)
 import Data.Maybe (Maybe(..))
+import Data.String (Pattern(..), replace)
+import Data.String.Pattern (Replacement(..))
 import Data.String.Utils (endsWith)
 import Data.Tuple (Tuple, fst, snd)
 import Effect.Class (class MonadEffect)
 import Foreign.Object as FO
 import Node.Minimatch (minimatch)
-import Node.Path (FilePath)
+import Node.Path (FilePath, basename)
 import VitePluginClassNameExtractor.Data.ClassNameExtractorConfig (ClassNameExtractorConfig(..))
 import VitePluginClassNameExtractor.Data.Namespace (coerceNamespace)
 import VitePluginClassNameExtractor.Data.TransformRule (TransformRule, toNamespace)
@@ -28,7 +30,8 @@ build filePath = do
     processModule :: ClassNameExtractorConfig -> m Unit
     processModule (ClassNameExtractorConfig { rules }) = 
       for_ (findMatchingRule rules) \rule -> do
-        let ns = toNamespace rule filePath
+        let moduleName = replace (Pattern ".module.css") (Replacement "") $ basename filePath
+        let ns = toNamespace rule moduleName
         execute filePath $ coerceNamespace ns
 
     findMatchingRule :: FO.Object TransformRule -> Maybe TransformRule

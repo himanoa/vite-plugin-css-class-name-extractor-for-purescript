@@ -13,4 +13,4 @@ spec = do
   describe "toNamespace" do
     it "should be Namespace foo.Button.bar" do
       let rule = TransformRule { prefix: Just "foo", suffix: Just "bar" }
-      (toNamespace rule "Button") `shouldEqual` makeNamespace "foo.Button.bar"
+      (toNamespace rule "Button") `shouldEqual` makeNamespace "Foo.Button.Bar"

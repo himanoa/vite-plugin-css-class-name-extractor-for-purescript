@@ -8,7 +8,9 @@ import Prelude
 
 import Control.Alternative (guard)
 import CssClassNameExtractor.Data.Output as CCNE
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), maybe)
+import Data.String (toUpper)
+import Data.String.CodeUnits (singleton, uncons)
 import Data.Tuple.Nested ((/\))
 
 newtype Namespace = Namespace CCNE.Namespace
@@ -32,7 +34,10 @@ derive newtype instance Show Namespace
 derive newtype instance Eq Namespace
 
 makeNamespace :: String -> Namespace
-makeNamespace a = Namespace $ CCNE.Namespace $ a
+makeNamespace a = Namespace $ CCNE.Namespace $ capitalizeName $ a
+
+capitalizeName :: String -> String
+capitalizeName name = maybe name (\{head, tail} -> (toUpper $ singleton head) <> tail ) (uncons name)
 
 coerceNamespace :: Namespace -> CCNE.Namespace
 coerceNamespace (Namespace ns) = ns
