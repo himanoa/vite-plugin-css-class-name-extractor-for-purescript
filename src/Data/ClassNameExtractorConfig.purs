@@ -1,11 +1,9 @@
 module VitePluginClassNameExtractor.Data.ClassNameExtractorConfig where
 
-import Prelude
-
 import Data.Generic.Rep (class Generic)
+import Foreign.Object as FO
 import Simple.JSON (class ReadForeign)
 import VitePluginClassNameExtractor.Data.TransformRule (TransformRule)
-import Foreign.Object as FO
 
 newtype ClassNameExtractorConfig = ClassNameExtractorConfig  {
   projectPrefix :: String,
@@ -16,3 +14,10 @@ newtype ClassNameExtractorConfig = ClassNameExtractorConfig  {
 derive instance Generic ClassNameExtractorConfig _
 
 derive newtype instance ReadForeign ClassNameExtractorConfig
+
+defaultConfig :: ClassNameExtractorConfig
+defaultConfig = ClassNameExtractorConfig {
+  projectPrefix: "Project",
+  srcDir : "src",
+  rules: FO.empty
+}
