@@ -3,11 +3,13 @@ module VitePluginClassNameExtractor.Data.TransformRule where
 import Prelude
 
 import Data.Either (Either(..), either)
+import Data.Eq.Generic (genericEq)
 import Data.FoldableWithIndex (foldlWithIndex)
 import Data.Generic.Rep (class Generic)
 import Data.Show.Generic (genericShow)
 import Data.String.Regex as R
 import Data.String.Regex.Flags (global)
+import Effect.Aff (Error, error, message)
 import Node.Nanomatch (capture)
 import Simple.JSON (class ReadForeign)
 import VitePluginClassNameExtractor.Data.Namespace (Namespace, makeNamespace)
@@ -37,12 +39,19 @@ newtype GlobPattern = GlobPattern String
 derive newtype instance Show GlobPattern
 derive newtype instance Eq GlobPattern
 
-data PlaceHolderError = RegexCompileError { error:: String }
+
+data PlaceHolderError = RegexCompileError { error:: String } | OtherError String
+toError ::  PlaceHolderError -> Error
+toError = error <<< show
+fromError ::  Error -> PlaceHolderError
+fromError err =  OtherError (message err)
 
 derive instance Generic PlaceHolderError _
+
 instance Show PlaceHolderError where
   show = genericShow
-derive instance Eq PlaceHolderError
+instance Eq PlaceHolderError where
+  eq = genericEq
 
 replaceNameWithCaptures :: Array String -> String -> Either PlaceHolderError String
 replaceNameWithCaptures captures name = do

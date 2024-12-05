@@ -13,7 +13,7 @@ export function vitePluginCssClassNameExtractorForPureScript(config) {
       const events = ["add", "addDir", "change", "unlink", "unlinkDir"]
       for (const e of events) {
         server.watcher.on(e, (entry) => {
-          handleWatch(entry)()
+          handleWatch(JSON.stringify(config))(entry)()
         })
       }
     }

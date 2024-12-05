@@ -2,17 +2,20 @@ module VitePluginClassNameExtractor.Test.Build where
 
 import Prelude
 
-import Control.Monad.Error.Class (class MonadThrow, throwError)
+import Control.Monad.Cont.Trans (lift)
+import Control.Monad.Error.Class (class MonadError, class MonadThrow, catchError)
 import Control.Monad.Reader (class MonadAsk, ReaderT, runReaderT)
-import Control.Monad.State (class MonadState, StateT, get, modify_, runStateT)
+import Control.Monad.State (class MonadState, StateT(..), get, modify_, runStateT)
 import CssClassNameExtractor.Data.Output (FileBody(..), coerceFileBody)
 import CssClassNameExtractor.FS (class MonadFS)
 import Data.Map (Map)
 import Data.Map as Map
 import Data.Maybe (Maybe(..))
+import Data.Newtype (unwrap)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
-import Effect.Aff (Aff, error)
+import Effect.Aff (Aff, Error, error, message)
+import Effect.Aff as Aff
 import Effect.Aff.Class (liftAff)
 import Effect.Class (class MonadEffect, liftEffect)
 import Effect.Console (log)
@@ -22,7 +25,7 @@ import Test.Spec (Spec, describe, it)
 import Test.Spec.Assertions (shouldNotEqual)
 import VitePluginClassNameExtractor.Build (build)
 import VitePluginClassNameExtractor.Data.ClassNameExtractorConfig (ClassNameExtractorConfig(..))
-import VitePluginClassNameExtractor.Data.TransformRule (PlaceHolderError, TransformRule(..), TransformRuleReplacement(..))
+import VitePluginClassNameExtractor.Data.TransformRule (PlaceHolderError(..), TransformRule(..), TransformRuleReplacement(..), fromError, toError)
 import VitePluginClassNameExtractor.Monad (PluginEnv)
 
 type FileSystem = Map FilePath FileBody
@@ -43,15 +46,22 @@ instance monadFSTestM :: MonadFS TestM where
     fs <- get
     case Map.lookup path fs of
       Just content -> pure (coerceFileBody content)
-      Nothing -> liftEffect $ throwError $ error $ "File not found: " <> path
+      Nothing -> liftEffect $ Aff.throwError $ error $ "File not found: " <> path
 
   writeFile path content = do
     modify_ $ Map.insert path content
 
   isExists _ = pure true
 
-instance monadThrow :: MonadThrow PlaceHolderError TestM where
-  throwError err = TestM $ throwError $ error $ (show err)
+instance MonadThrow PlaceHolderError TestM where
+  throwError e = TestM $ lift $ lift $ Aff.throwError (toError e)
+
+
+instance MonadError PlaceHolderError TestM where
+  catchError (TestM m) h = TestM $ StateT \s -> 
+    Aff.catchError 
+      (runStateT m s) 
+      (\err -> let TestM m' = h (fromError err) in runStateT m' s)
 
 runTest :: forall a. ClassNameExtractorConfig -> FileSystem -> TestM a -> Aff (Tuple a FileSystem)
 runTest config init (TestM m) = do
