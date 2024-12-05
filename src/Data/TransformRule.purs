@@ -65,8 +65,6 @@ replaceNameWithCaptures captures name = do
 toNamespace :: TransformRule -> GlobPattern -> ModuleName -> Either PlaceHolderError Namespace
 toNamespace (TransformRule { replacement }) (GlobPattern pattern) name = do
   let TransformRuleReplacement(rep) = replacement
+  let captures = capture pattern name
   replacedName <- replaceNameWithCaptures captures rep
   Right $ makeNamespace replacedName
-  where
-    captures :: Array String
-    captures = capture pattern name
