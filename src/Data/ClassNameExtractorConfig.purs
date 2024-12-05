@@ -6,8 +6,6 @@ import Simple.JSON (class ReadForeign)
 import VitePluginClassNameExtractor.Data.TransformRule (TransformRule)
 
 newtype ClassNameExtractorConfig = ClassNameExtractorConfig  {
-  projectPrefix :: String,
-  srcDir :: String,
   rules:: FO.Object TransformRule
 }
 
@@ -17,7 +15,5 @@ derive newtype instance ReadForeign ClassNameExtractorConfig
 
 defaultConfig :: ClassNameExtractorConfig
 defaultConfig = ClassNameExtractorConfig {
-  projectPrefix: "Project",
-  srcDir : "src",
   rules: FO.empty
 }
