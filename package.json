@@ -16,6 +16,6 @@
     "spago": "0.21.0"
   },
   "dependencies": {
-    "minimatch": "10.0.1"
+    "nanomatch": "1.2.13"
   }
 }

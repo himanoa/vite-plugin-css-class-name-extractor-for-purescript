@@ -13,6 +13,7 @@ to generate this file without the comments in this block.
 { name = "vite-plugin-css-class-name-extractor-for-purescript"
 , dependencies =
   [ "aff"
+  , "arrays"
   , "console"
   , "control"
   , "css-class-name-extractor"
