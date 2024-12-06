@@ -1,1 +1,2 @@
 .wrapper { display: flex;}
+.foo > .bar { display: flex;}
