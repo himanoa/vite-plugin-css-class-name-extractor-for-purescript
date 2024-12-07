@@ -38,13 +38,11 @@ build filePath = do
   current <- liftEffect cwd
   let filePath' = relative current filePath
   whenM (pure $ isCssModule filePath') do
-    liftEffect $ log ("Build start: " <> filePath')
     (processModule filePath' config) `catchError` \err ->  liftEffect $ Console.error (show err)
     pure unit
   where
     processModule :: FilePath -> ClassNameExtractorConfig -> m Unit
     processModule fp (ClassNameExtractorConfig { rules }) = do
-      liftEffect $ log (show rules)
       for_ (findMatchingRule fp rules) \(Tuple (GlobPattern pattern) rule) -> do
         let eitherNs = toNamespace rule (GlobPattern pattern) fp
 
