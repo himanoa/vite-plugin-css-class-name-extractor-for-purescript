@@ -12,6 +12,7 @@
   "license": "MIT",
   "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee",
   "devDependencies": {
+    "publint": "^0.2.12",
     "purescript": "0.15.15",
     "purs-tidy": "0.11.0",
     "spago": "0.21.0",
@@ -20,14 +21,21 @@
     "vite": "6.0.3"
   },
   "tsup": {
-    "entry": ["index.ts"],
+    "entry": [
+      "index.ts"
+    ],
     "minify": true,
     "sourcemap": true,
     "splitting": false,
-    "target": ["node20"],
+    "target": [
+      "node20"
+    ],
     "dts": "index.ts",
     "dtsResolve": true,
-    "format": ["cjs", "esm"]
+    "format": [
+      "cjs",
+      "esm"
+    ]
   },
   "dependencies": {
     "nanomatch": "1.2.13"
