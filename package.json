@@ -2,10 +2,32 @@
   "name": "vite-plugin-css-class-name-extractor-for-purescript",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": false,
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": ["README.md", "package.json", "LICENSE", "dist/*"],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "test": "spago test",
-    "build": "spago build && tsup"
+    "build": "spago build && tsup",
+    "publint": "publint"
   },
   "keywords": [],
   "author": "",
