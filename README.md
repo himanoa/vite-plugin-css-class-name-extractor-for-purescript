@@ -11,7 +11,7 @@ A Vite plugin that enables type-safe usage of CSS Modules in PureScript applicat
 ## Installation
 
 ```bash
-npm install vite-plugin-classname-extractor --save-dev
+npm install vite-plugin-css-class-name-extractor-for-purescript --save-dev
 ```
 
 ## Usage
