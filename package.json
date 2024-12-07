@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "spago test",
+    "build": "spago build && tsup"
   },
   "keywords": [],
   "author": "",
@@ -14,8 +15,19 @@
     "purescript": "0.15.15",
     "purs-tidy": "0.11.0",
     "spago": "0.21.0",
+    "tsup": "^8.3.5",
     "typescript": "^5.7.2",
     "vite": "6.0.3"
+  },
+  "tsup": {
+    "entry": ["index.ts"],
+    "minify": true,
+    "sourcemap": true,
+    "splitting": false,
+    "target": ["node20"],
+    "dts": "index.ts",
+    "dtsResolve": true,
+    "format": ["cjs", "esm"]
   },
   "dependencies": {
     "nanomatch": "1.2.13"

@@ -1,5 +1,5 @@
 declare module '*/VitePluginClassNameExtractor.Watch/index.js' {
-  export function handleWatch(config: string): () => Promise<void>;
+  export function handleWatch(config: string): (id: string) => () => Promise<void>;
 }
 
 declare module '*/VitePluginClassNameExtractor.Start/index.js' {
