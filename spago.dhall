@@ -26,6 +26,7 @@ to generate this file without the comments in this block.
   , "maybe"
   , "newtype"
   , "node-path"
+  , "node-process"
   , "ordered-collections"
   , "prelude"
   , "simple-json"
