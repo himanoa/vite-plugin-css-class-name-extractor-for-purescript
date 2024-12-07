@@ -21,6 +21,9 @@ importers:
       spago:
         specifier: 0.21.0
         version: 0.21.0
+      typescript:
+        specifier: ^5.7.2
+        version: 5.7.2
       vite:
         specifier: 6.0.3
         version: 6.0.3
@@ -1189,6 +1192,11 @@ packages:
 
   typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
+
+  typescript@5.7.2:
+    resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
+    engines: {node: '>=14.17'}
+    hasBin: true
 
   union-value@1.0.1:
     resolution: {integrity: sha512-tJfXmxMeWYnczCVs7XAEvIV7ieppALdyepWMkHkwciRpZraG/xwT+s2JN8+pr1+8jCRf80FFzvr+MpQeeoF4Xg==}
@@ -2546,6 +2554,8 @@ snapshots:
   type-fest@0.21.3: {}
 
   typedarray@0.0.6: {}
+
+  typescript@5.7.2: {}
 
   union-value@1.0.1:
     dependencies:
