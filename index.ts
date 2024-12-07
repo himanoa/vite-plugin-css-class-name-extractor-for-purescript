@@ -32,3 +32,5 @@ export function vitePluginCssClassNameExtractorForPureScript(config: Config): Pl
     }
   }
 }
+
+export default vitePluginCssClassNameExtractorForPureScript

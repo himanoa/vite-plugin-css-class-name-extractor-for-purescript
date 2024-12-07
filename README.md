@@ -20,7 +20,7 @@ Just add the plugin to your vite.config.ts:
 
 ```typescript
 import { defineConfig } from 'vite'
-import classNameExtractor from 'vite-plugin-classname-extractor'
+import classNameExtractor from 'vite-plugin-css-class-name-extractor-for-purescript'
 
 export default defineConfig({
   plugins: [
