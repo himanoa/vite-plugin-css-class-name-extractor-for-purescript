@@ -6,11 +6,9 @@ import Control.Monad.Cont (lift)
 import Control.Monad.Error.Class (class MonadError, class MonadThrow)
 import Control.Monad.Reader (ReaderT(..), ask, runReaderT)
 import Control.Monad.Reader.Class (class MonadAsk)
-import Control.Monad.State (StateT(..), runStateT)
 import CssClassNameExtractor.FS (class MonadFS)
 import CssClassNameExtractor.FS (isExists, readFile, writeFile) as CssRIO
 import CssClassNameExtractor.RIO (RIO, runRIO) as CssRIO
-import Data.Newtype (unwrap)
 import Effect.Aff (Aff)
 import Effect.Aff as Aff
 import Effect.Aff.Class (class MonadAff, liftAff)

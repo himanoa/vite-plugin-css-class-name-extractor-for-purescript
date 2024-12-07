@@ -1,4 +1,5 @@
 import { handleWatch } from './output/VitePluginClassNameExtractor.Watch/index.js'
+import { handleStart } from './output/VitePluginClassNameExtractor.Start/index.js'
 
 export function vitePluginCssClassNameExtractorForPureScript(config) {
   let server;
@@ -9,7 +10,8 @@ export function vitePluginCssClassNameExtractorForPureScript(config) {
     configureServer(s) {
       server = s
     },
-    buildStart() {
+    async buildStart() {
+      await handleStart(JSON.stringify(config))()
       const events = ["add", "addDir", "change", "unlink", "unlinkDir"]
       for (const e of events) {
         server.watcher.on(e, (entry) => {

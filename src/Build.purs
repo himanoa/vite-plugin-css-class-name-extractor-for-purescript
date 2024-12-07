@@ -26,7 +26,13 @@ import VitePluginClassNameExtractor.Data.TransformRule (GlobPattern(..), PlaceHo
 import VitePluginClassNameExtractor.Monad (PluginEnv)
 
 
-build :: forall m. MonadFS m => MonadEffect m => (MonadAsk PluginEnv m) => MonadThrow PlaceHolderError m => MonadError PlaceHolderError m =>  FilePath -> m Unit
+build :: forall m.
+  MonadFS m =>
+  MonadEffect m =>
+  (MonadAsk PluginEnv m) =>
+  MonadThrow PlaceHolderError m =>
+  MonadError PlaceHolderError m =>
+  FilePath -> m Unit
 build filePath = do
   {config} <- ask
   current <- liftEffect cwd
