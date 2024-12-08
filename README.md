@@ -110,3 +110,6 @@ The generated code provides:
 ## License
 
 MIT
+
+## Related
+- [PureScriptでViteのCSSModuleサポートを使う - 遺言書](https://blog.himanoa.net/93/)
