@@ -1,5 +1,15 @@
 # vite-plugin-css-class-name-extractor-for-purescript
 
+## 0.0.4
+
+### Patch Changes
+
+- c916710: Fix a bug where expandGlobsCwd does not work with multiple patterns
+
+  Process patterns individually to avoid interference between patterns
+  when matching files. This ensures correct rule application and
+  namespace generation for each pattern.
+
 ## 0.0.3
 
 ### Patch Changes
