@@ -17,6 +17,7 @@ import Effect.Aff (Aff, error)
 import Effect.Aff as Aff
 import Effect.Aff.Class (class MonadAff, liftAff)
 import Effect.Class (class MonadEffect, liftEffect)
+import Effect.Console (log)
 import Foreign.Object as FO
 import Node.Path (FilePath)
 import Test.Spec (Spec, describe, it)
@@ -69,6 +70,20 @@ runTest config init (TestM m) = do
 spec :: Spec Unit
 spec = do
   describe "PreBuild" do
+    describe "real file" do
+      it "should be writed file" do
+        let config = ClassNameExtractorConfig {
+          rules: FO.fromFoldable [
+            "example/src/components/*/*.module.css" /\ TransformRule { replacement: (TransformRuleReplacement "Components.\\1.\\2.Styles") },
+            "example/src/components/*.module.css" /\ TransformRule { replacement: (TransformRuleReplacement "Components.\\1.Styles") }
+          ]
+        }
+        (Tuple _ result) <- liftAff $  runTest config (Map.fromFoldable [
+          "example/src/components/Colors.module.css" /\ FileBody ".foo { display; flex; }"
+          ]) prebuild
+
+        result `shouldNotEqual` Map.empty
+
     it "should be writed file" do
       let config = ClassNameExtractorConfig {
         rules: FO.fromFoldable [ "foo.module.css" /\ TransformRule { replacement: (TransformRuleReplacement "foo") } ]
