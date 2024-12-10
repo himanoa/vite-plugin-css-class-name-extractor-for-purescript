@@ -39,15 +39,17 @@ prebuild = do
   current <- liftEffect $ cwd
   let (ClassNameExtractorConfig {rules}) = config
   let patterns = keys rules
-  files <- liftAff $ expandGlobsCwd patterns
-  for_ (files) \(filePath) -> do
-    let path = relative current filePath
-    let pattern = find (\pat -> isMatch path pat) patterns
-    case pattern of
-      Just pat -> do
-        for_ (FO.lookup pat rules) \rule -> do
-          let eitherNs = toNamespace rule (GlobPattern pat) path
-          ns <- either (\err -> throwError err) (\n -> pure (coerceNamespace n)) eitherNs
-          distributeCss path ns
-          liftEffect $ log $ "Distributed from: " <> path
-      Nothing -> liftEffect $ warn $ "Can't match rules: " <> filePath
+  liftEffect $ log $ show patterns
+  for_ (patterns) \(pattern') -> do
+    files <- liftAff $ expandGlobsCwd [pattern']
+    for_ (files) \(filePath) -> do
+      let path = relative current filePath
+      let pattern = find (\pat -> isMatch path pat) patterns
+      case pattern of
+        Just pat -> do
+          for_ (FO.lookup pat rules) \rule -> do
+            let eitherNs = toNamespace rule (GlobPattern pat) path
+            ns <- either (\err -> throwError err) (\n -> pure (coerceNamespace n)) eitherNs
+            distributeCss path ns
+            liftEffect $ log $ "Distributed from: " <> path
+        Nothing -> liftEffect $ warn $ "Can't match rules: " <> filePath
