@@ -13,6 +13,10 @@
     "LICENSE",
     "dist/*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/himanoa/vite-plugin-css-class-name-extractor-for-purescript.git"
+  },
   "exports": {
     ".": {
       "import": {
