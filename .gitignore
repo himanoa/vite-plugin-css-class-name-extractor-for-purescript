@@ -6,3 +6,4 @@ dist/*
 .spec-results
 .psc-ide-port
 .psci_modules
+example/dist/*
