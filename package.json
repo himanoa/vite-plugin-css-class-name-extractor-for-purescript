@@ -38,7 +38,7 @@
     "build": "spago build && tsup",
     "publint": "publint",
     "changeset": "changeset",
-    "bump": "changeset version",
+    "bump": "changeset version && changeset tag && git push --tags",
     "publish": "pnpm build && changeset publish"
   },
   "keywords": [
