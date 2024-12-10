@@ -12,7 +12,6 @@ export function vitePluginCssClassNameExtractorForPureScript(config: Config): Pl
 
   return {
     name: "vite-plugin-css-class-name-extractor-for-purescript",
-    apply: 'serve',
     configResolved(s) {
       command = s.command
     },
