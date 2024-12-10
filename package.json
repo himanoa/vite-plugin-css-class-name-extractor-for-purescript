@@ -39,7 +39,7 @@
     "publint": "publint",
     "changeset": "changeset",
     "bump": "changeset version",
-    "publish": "changeset publish"
+    "publish": "pnpm build && changeset publish"
   },
   "keywords": [
     "vite",
