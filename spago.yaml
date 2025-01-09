@@ -1,0 +1,33 @@
+package:
+  dependencies:
+  - aff
+  - aff-promise
+  - arrays
+  - console
+  - control
+  - css-class-name-extractor
+  - effect
+  - either
+  - foldable-traversable
+  - foreign
+  - foreign-object
+  - lists
+  - maybe
+  - newtype
+  - node-glob-basic
+  - node-path
+  - node-process
+  - ordered-collections
+  - prelude
+  - simple-json
+  - spec
+  - spec-discovery
+  - strings
+  - stringutils
+  - transformers
+  - tuples
+  name: vite-plugin-css-class-name-extractor-for-purescript
+workspace:
+  extra_packages: {}
+  package_set:
+    url: https://raw.githubusercontent.com/purescript/package-sets/psc-0.15.15-20241207/packages.json
