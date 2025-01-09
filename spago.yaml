@@ -28,6 +28,10 @@ package:
   - tuples
   name: vite-plugin-css-class-name-extractor-for-purescript
 workspace:
-  extra_packages: {}
+  extra_packages: 
+    css-class-name-extractor:
+      git: https://github.com/himanoa/purescript-css-class-name-extractor.git
+      ref: 0.0.4
+      dependencies: [ "aff", "arrays", "console", "control" , "effect", "either", "enums", "exceptions", "foldable-traversable", "identity", "interpolate", "lists", "maybe", "node-buffer", "node-fs", "node-path", "optparse", "ordered-collections", "parsing", "prelude", "spec", "spec-discovery", "spec-node", "strings", "transformers", "tuples"]
   package_set:
     url: https://raw.githubusercontent.com/purescript/package-sets/psc-0.15.15-20241207/packages.json

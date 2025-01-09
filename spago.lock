@@ -7821,7 +7821,40 @@
         }
       }
     },
-    "extra_packages": {}
+    "extra_packages": {
+      "css-class-name-extractor": {
+        "git": "https://github.com/himanoa/purescript-css-class-name-extractor.git",
+        "ref": "0.0.4",
+        "dependencies": [
+          "aff",
+          "arrays",
+          "console",
+          "control",
+          "effect",
+          "either",
+          "enums",
+          "exceptions",
+          "foldable-traversable",
+          "identity",
+          "interpolate",
+          "lists",
+          "maybe",
+          "node-buffer",
+          "node-fs",
+          "node-path",
+          "optparse",
+          "ordered-collections",
+          "parsing",
+          "prelude",
+          "spec",
+          "spec-discovery",
+          "spec-node",
+          "strings",
+          "transformers",
+          "tuples"
+        ]
+      }
+    }
   },
   "packages": {
     "aff": {
@@ -8011,7 +8044,7 @@
     "css-class-name-extractor": {
       "type": "git",
       "url": "https://github.com/himanoa/purescript-css-class-name-extractor.git",
-      "rev": "77f0bd5a0390fd34e301d5e86148cb19f2d88aa4",
+      "rev": "dc33900ae439c60b6b239817d461f9eb237d43c9",
       "dependencies": [
         "aff",
         "arrays",
@@ -8029,11 +8062,13 @@
         "node-buffer",
         "node-fs",
         "node-path",
+        "optparse",
         "ordered-collections",
         "parsing",
         "prelude",
         "spec",
         "spec-discovery",
+        "spec-node",
         "strings",
         "transformers",
         "tuples"
