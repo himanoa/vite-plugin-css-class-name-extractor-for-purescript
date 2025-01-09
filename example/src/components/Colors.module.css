@@ -1,2 +1,5 @@
 .wrapper { display: flex;}
 .foo > .bar { display: flex;}
+@keyframes foo {}
+
+.wrapperTwo {}
