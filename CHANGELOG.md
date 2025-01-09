@@ -1,5 +1,11 @@
 # vite-plugin-css-class-name-extractor-for-purescript
 
+## 0.0.5
+
+### Patch Changes
+
+- b5d3ed3: Update class-name-extractor
+
 ## 0.0.4
 
 ### Patch Changes
